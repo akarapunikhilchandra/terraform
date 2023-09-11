@@ -1,14 +1,8 @@
-variable "isPROD" {
-    default = false
+variable "instance_names" {
+  type = list
+  default = ["MongoDB", "Cart", "Catalogue", "User" , "Redis", "MySQL", "RabbitMQ", "Shipping", "Payment", "Web"]
 }
 
-# variable "tags" {
-#     default = {
-#         Name = "mongodb"
-#     }
-# }
-
-variable "instance_names" {
-    type = list 
-    default = ["mongodb", "catalogue", "web"]
+variable "isPROD" {
+  default = false
 }

@@ -1,7 +1,7 @@
 resource "aws_instance" "file-function" {
     count = 3
     ami = local.ami_id 
-    instance_type = var.instance_names[count.index]
+    instance_type = local.instance_type  
     tags = {
         Name = var.instance_names[count.index]  
     }  
