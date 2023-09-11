@@ -12,3 +12,7 @@ variable "zone_id" {
     type = string
     default = "Z10334032ZMZZ509Q21DU"
 }
+
+variable "domain" {
+    default = "joindevops.cloud"
+}

@@ -10,7 +10,7 @@ resource "aws_instance" "my" {
 resource "aws_route53_record" "myrecord" {
   count   = 10
   zone_id = var.zone_id
-  name    = "${var.instance_names[count.index]}.joindevops.cloud"
+  name    = "${var.instance_names[count.index]}.${var.domain}"
   type    = "A"
   ttl     = 1
   records = [aws_instance.my[count.index].private_ip]
