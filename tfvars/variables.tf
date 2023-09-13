@@ -2,7 +2,7 @@ variable "instances" {
     type = map 
     default = {
         mongodb = "t2.micro"
-        mysql = "t2.micro"
+        # mysql = "t2.micro"
         # redis = "t2.micro"
         # rabbitmq = "t2.micro"
         # catalogue = "t2.micro"
