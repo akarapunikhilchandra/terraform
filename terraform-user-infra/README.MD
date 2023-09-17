@@ -20,3 +20,4 @@ private_subnet_cidr(Required) - User must provide a list of 2 private subnet CID
 private_subnet_names(Required) - User must provide a list of 2 private subnet names.
 database_subnet_cidr(Required) - User must provide a list of 2 database subnet CIDR.
 database_subnet_names(Required) - User must provide a list of 2 database subnet names.
+----------------------------------------------------------------------------------------
