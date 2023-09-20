@@ -1,0 +1,17 @@
+module "ec2_instance" {
+  for_each = var.instances 
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  ami = data.aws_ami.devops.id  
+  instance_type = each.value                
+  vpc_security_group_ids = [local.allow_all_security_group_id] 
+#   subnet_id = local.public_subnet_ids[0]  #public subnet in 1a 
+
+  subnet_id = each.key == "web" ? local.public_subnet_ids[0] : local.private_subnet_ids[0]
+
+  tags = merge(
+    {
+        Name = each.key 
+    },
+    var.common_tags 
+  )
+}

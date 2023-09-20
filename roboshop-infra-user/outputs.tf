@@ -19,7 +19,7 @@ output "database_subnet_ids" {
 }
 
 # output "ami_id" {
-#   value = data.aws_ami.devops_ami.id
+#   value = data.aws_ami.devops.id 
 # }
 
 # output "ips" {
