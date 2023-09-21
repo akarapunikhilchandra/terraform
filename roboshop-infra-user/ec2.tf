@@ -17,7 +17,7 @@ module "ec2_instance" {
 }
 module "ec2_ansible" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  ami = data.aws_ami.devops_ami.id
+  ami = data.aws_ami.devops.id
   instance_type = "t2.micro"
   vpc_security_group_ids = [local.allow_all_security_group_id]
   subnet_id = local.public_subnet_ids[0] # public subnet in 1a az
