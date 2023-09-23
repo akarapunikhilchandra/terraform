@@ -38,15 +38,15 @@ variable "sg_ingress_rules" {
 variable "instances" {
   default = {
     mongodb = "t3.micro"
-    # mysql = "t3.micro"
-    # redis = "t2.micro"
-    # rabbitmq = "t2.micro"
-    # cart = "t2.micro"
-    # user = "t2.micro"
+    mysql = "t3.micro"
+    redis = "t2.micro"
+    rabbitmq = "t2.micro"
+    cart = "t2.micro"
+    user = "t2.micro"
     catalogue = "t2.micro"
     web = "t2.micro"
-    # shipping = "t2.micro"
-    # payment = "t2.micro"
+    shipping = "t2.micro"
+    payment = "t2.micro"
   }
 }
 
