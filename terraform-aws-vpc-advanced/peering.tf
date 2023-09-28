@@ -1,19 +1,19 @@
-# ### VPC Peering with Default VPC
-# resource "aws_vpc_peering_connection" "peering" {
-#   count = var.is_peering_required ? 1 : 0
-#   #peer_owner_id = var.peer_owner_id
-#   peer_vpc_id   = aws_vpc.main.id
-#   #requestor, default VPC is our requestor
-#   vpc_id        = var.requestor_vpc_id
-#   auto_accept   = true
+### VPC Peering with Default VPC
+resource "aws_vpc_peering_connection" "peering" {
+  count = var.is_peering_required ? 1 : 0
+  #peer_owner_id = var.peer_owner_id
+  peer_vpc_id   = aws_vpc.main.id
+  #requestor, default VPC is our requestor
+  vpc_id        = var.requestor_vpc_id
+  auto_accept   = true
 
-#   tags = merge(
-#     {
-#       Name = "VPC Peering between Default and ${var.project_name}"
-#     },
-#     var.common_tags
-#   )
-# }
+  tags = merge(
+    {
+      Name = "VPC Peering between Default and ${var.project_name}"
+    },
+    var.common_tags
+  )
+}
 
 # resource "aws_route" "default_route" {
 #   count = var.is_peering_required ? 1 : 0
