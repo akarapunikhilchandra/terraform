@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket   = "roboshop-state-file"
-    key = "vpc"
+    key = "vpn"
     region = "us-east-1"
     dynamodb_table = "roboshop-locking"
   }

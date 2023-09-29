@@ -11,6 +11,8 @@ variable "cidr_block" {
 
 variable "common_tags" {
   default = {
+    Project = "roboshop"
+    component = "vpc"
     Environment = "DEV"
     Terraform = "true"
   }
