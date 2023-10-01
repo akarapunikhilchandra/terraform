@@ -22,14 +22,14 @@ resource "aws_ssm_parameter" "web_sg_id" {
   value = module.web_sg.security_group_id
 }
 
-# resource "aws_ssm_parameter" "app_alb_sg_id" {
-#   name  = "/${var.project_name}/${var.env}/app_alb_sg_id" 
-#   type  = "String"
-#   value = module.app_alb_sg.security_group_id
-# }
+resource "aws_ssm_parameter" "app_alb_sg_id" {
+  name  = "/${var.project_name}/${var.env}/app_alb_sg_id" 
+  type  = "String"
+  value = module.app_alb_sg.security_group_id
+}
 
-# resource "aws_ssm_parameter" "web_alb_sg_id" {
-#   name  = "/${var.project_name}/${var.env}/web_alb_sg_id" 
-#   type  = "String"
-#   value = module.web_alb_sg.security_group_id
-# }
+resource "aws_ssm_parameter" "web_alb_sg_id" {
+  name  = "/${var.project_name}/${var.env}/web_alb_sg_id" 
+  type  = "String"
+  value = module.web_alb_sg.security_group_id
+}
