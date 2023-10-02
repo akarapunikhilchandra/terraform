@@ -4,7 +4,7 @@ variable "project_name" {
 variable "common_tags" {
   default = {
     Project = "roboshop"
-    component = "vpn"
+    component = "App-ALB"
     Environment = "DEV"
     Terraform = "true"
   }

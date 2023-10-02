@@ -3,7 +3,7 @@ module "vpn_sg" {
   project_name = var.project_name 
   sg_name = "roboshop-vpn"
   sg_description = "allowing all ports from my home IP"
-# sg_ingress_rules = var.sg_ingress_rules
+  # sg_ingress_rules = var.sg_ingress_rules
   vpc_id = data.aws_vpc.default.id  #we are capturing the local ID in locals.tf so we are using it
   common_tags = merge(
     var.common_tags,
@@ -91,6 +91,16 @@ module "web_alb_sg" {
         Name = "web-alb"
     }
   )
+}
+
+resource "aws_security_group_rule" "vpn" {
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "tcp"
+  cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+  #ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.vpn_sg.security_group_id
 }
 
 resource "aws_security_group_rule" "mongodb_catalogue" {

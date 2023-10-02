@@ -13,3 +13,6 @@ variable "common_tags" {
 variable "env" {
   default = "dev"
 }
+variable "zone_name" {
+  default = "joindevops.cloud"
+}
