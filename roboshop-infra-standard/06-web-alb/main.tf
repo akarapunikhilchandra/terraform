@@ -37,7 +37,7 @@ resource "aws_route53_record" "joindevops" {
 }
 
 resource "aws_acm_certificate_validation" "joindevops" {
-  certificate_arn         = aws_acm_certificate.joindevops.arn
+  certificate_arn         = aws_acm_certificate.example.arn
   validation_record_fqdns = [for record in aws_route53_record.joindevops : record.fqdn]
 }
 
