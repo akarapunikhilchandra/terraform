@@ -114,6 +114,7 @@ resource "aws_security_group_rule" "mongodb_catalogue" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.mongodb_sg.security_group_id  
 }
+
 resource "aws_security_group_rule" "mongodb_vpn" {
   type              = "ingress"
   description = "allowing port number 22 from vpn"
@@ -125,6 +126,7 @@ resource "aws_security_group_rule" "mongodb_vpn" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.mongodb_sg.security_group_id  
 }
+
 resource "aws_security_group_rule" "catalogue_vpn" {
   type              = "ingress"
   description = "allowing port number 22 from vpn"
@@ -136,6 +138,7 @@ resource "aws_security_group_rule" "catalogue_vpn" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.catalogue_sg.security_group_id  
 }
+
 resource "aws_security_group_rule" "catalogue_app_alb" {
   type              = "ingress"
   description = "allowing port number 8080 from app"
@@ -147,6 +150,7 @@ resource "aws_security_group_rule" "catalogue_app_alb" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.catalogue_sg.security_group_id  
 }
+
 resource "aws_security_group_rule" "app_alb_vpn" {
   type              = "ingress"
   description = "allowing port number 80 from app"
@@ -182,6 +186,19 @@ resource "aws_security_group_rule" "web_vpn" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.web_sg.security_group_id  
 }
+
+resource "aws_security_group_rule" "web_vpn_ssh" {
+  type              = "ingress"
+  description = "allowing port number 22 from vpn"
+  from_port         = 22
+  to_port           = 22   
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.web_sg.security_group_id  
+}
+
 resource "aws_security_group_rule" "web_web_alb" {
   type              = "ingress"
   description = "allowing port number 80 from vpn"
@@ -196,9 +213,21 @@ resource "aws_security_group_rule" "web_web_alb" {
 
 resource "aws_security_group_rule" "web_alb_internet" {
   type              = "ingress"
-  description = "allowing port number 80 from vpn"
+  description = "allowing port number 80 from internet"
   from_port         = 80
   to_port           = 80   
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"] 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.web_alb_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "web_alb_internet_https" {
+  type              = "ingress"
+  description = "allowing port number 443 from internet"
+  from_port         = 443
+  to_port           = 443  
   protocol          = "tcp"
   cidr_blocks = ["0.0.0.0/0"] 
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
