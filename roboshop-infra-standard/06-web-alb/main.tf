@@ -21,7 +21,7 @@ data "aws_route53_zone" "joindevops" {
 
 resource "aws_route53_record" "joindevops" {
   for_each = {
-    for dvo in aws_acm_certificate.joindevops.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.example.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -46,7 +46,7 @@ resource "aws_lb_listener" "front_end" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.joindevops.arn 
+  certificate_arn   = aws_acm_certificate.example.arn 
 
   default_action {
     type = "fixed-response"
