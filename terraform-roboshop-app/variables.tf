@@ -66,6 +66,10 @@ variable "health_check_type" {
   default = "ELB"
 }
 
+variable "desired_capacity" {
+  default = 2
+}
+
 variable "vpc_zone_identifier" {
   type = list
 }
