@@ -23,7 +23,7 @@ module "cart" {
 
   #listener rule 
   alb_listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value 
-  rule_priority = 20 #catalogue have 10 already
+  rule_priority = 30 #catalogue have 10 already
   host_header = "cart.app.joindevops.cloud"  
 
 }
