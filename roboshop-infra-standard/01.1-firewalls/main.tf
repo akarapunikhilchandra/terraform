@@ -429,6 +429,50 @@ resource "aws_security_group_rule" "cart_app_alb" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.cart_sg.security_group_id  
 }
+resource "aws_security_group_rule" "shipping_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22  
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.shipping_sg.security_group_id  
+}
+resource "aws_security_group_rule" "shipping_app_alb" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 8080
+  to_port           = 8080  
+  protocol          = "tcp"
+  source_security_group_id = module.app_alb.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.shipping_sg.security_group_id  
+}
+resource "aws_security_group_rule" "payment_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22  
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.payment_sg.security_group_id  
+}
+resource "aws_security_group_rule" "payment_app_alb" {
+  type              = "ingress"
+  description = "allowing port number 8080 from app_alb"
+  from_port         = 8080
+  to_port           = 8080  
+  protocol          = "tcp"
+  source_security_group_id = module.app_alb_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.payment_sg.security_group_id  
+}
 
 resource "aws_security_group_rule" "app_alb_vpn" {
   type              = "ingress"
@@ -454,19 +498,66 @@ resource "aws_security_group_rule" "app_alb_web" {
   security_group_id = module.app_alb_sg.security_group_id  
 }
 
-resource "aws_security_group_rule" "web_vpn" {
+resource "aws_security_group_rule" "app_alb_catalogue" {
   type              = "ingress"
-  description = "allowing port number 80 from vpn"
+  description = "allowing port number 80 from catalogue"
   from_port         = 80
-  to_port           = 80   
+  to_port           = 80
   protocol          = "tcp"
-  source_security_group_id = module.vpn_sg.security_group_id 
+  source_security_group_id = module.catalogue_sg.security_group_id 
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.web_sg.security_group_id  
+  security_group_id = module.app_alb_sg.security_group_id  
 }
 
-resource "aws_security_group_rule" "web_vpn_ssh" {
+resource "aws_security_group_rule" "app_alb_user" {
+  type              = "ingress"
+  description = "allowing port number 80 from user"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.user_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.app_alb_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "app_alb_cart" {
+  type              = "ingress"
+  description = "allowing port number 80 from cart"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.cart_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.app_alb_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "app_alb_shipping" {
+  type              = "ingress"
+  description = "allowing port number 80 from shipping"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.shipping_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.app_alb_sg.security_group_id  
+}
+resource "aws_security_group_rule" "app_alb_payment" {
+  type              = "ingress"
+  description = "allowing port number 80 from payment"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.payment_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.app_alb_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "web_vpn" {
   type              = "ingress"
   description = "allowing port number 22 from vpn"
   from_port         = 22
@@ -490,7 +581,7 @@ resource "aws_security_group_rule" "web_web_alb" {
   security_group_id = module.web_sg.security_group_id  
 }
 
-resource "aws_security_group_rule" "web_alb_internet" {
+resource "aws_security_group_rule" "web_alb_http" {
   type              = "ingress"
   description = "allowing port number 80 from internet"
   from_port         = 80
@@ -502,7 +593,7 @@ resource "aws_security_group_rule" "web_alb_internet" {
   security_group_id = module.web_alb_sg.security_group_id  
 }
 
-resource "aws_security_group_rule" "web_alb_internet_https" {
+resource "aws_security_group_rule" "web_alb_https" {
   type              = "ingress"
   description = "allowing port number 443 from internet"
   from_port         = 443

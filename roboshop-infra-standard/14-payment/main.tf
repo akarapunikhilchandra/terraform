@@ -17,7 +17,7 @@ module "payment" {
 
   #autoscaling
   vpc_zone_identifier = split(",",data.aws_ssm_parameter.private_subnet_ids.value) 
-  tag = var.autoscaling_tags 
+  tag = var.autoscaling_tags  
   
   #autoscaling policy i am good with optional 
 
