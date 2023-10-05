@@ -397,8 +397,8 @@ resource "aws_security_group_rule" "cart_vpn" {
 resource "aws_security_group_rule" "cart_app_alb" {
   type              = "ingress"
   description = "allowing port number 22 from VPN"
-  from_port         = 80
-  to_port           = 80  
+  from_port         = 8080
+  to_port           = 8080
   protocol          = "tcp"
   source_security_group_id = module.app_alb_sg.security_group_id 
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]

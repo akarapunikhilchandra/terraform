@@ -10,7 +10,7 @@ module "cart" {
   vpc_id = data.aws_ssm_parameter.vpc_id.value
 
   #launch template
-  image_id = data.aws_ami.devops_ami.id
+  image_id = data.aws_ami.devops.id
   security_group_id = data.aws_ssm_parameter.cart_sg_id.value
   user_data = filebase64("${path.module}/cart.sh")
   launch_template_tags = var.launch_template_tags
