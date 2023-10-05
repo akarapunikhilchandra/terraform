@@ -422,7 +422,7 @@ resource "aws_security_group_rule" "shipping_app_alb" {
   from_port         = 8080
   to_port           = 8080  
   protocol          = "tcp"
-  source_security_group_id = module.app_alb.security_group_id 
+  source_security_group_id = module.app_alb_sg.security_group_id 
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.shipping_sg.security_group_id  

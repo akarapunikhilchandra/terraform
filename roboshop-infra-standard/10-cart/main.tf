@@ -1,31 +1,29 @@
 module "cart" {
   source = "../../terraform-roboshop-app"
-  project_name = var.project_name 
-  env = var.env 
+  project_name = var.project_name
+  env = var.env
   common_tags = var.common_tags
 
-  #target group 
-#   health_check = var.health_check
+  #target group
+  #health_check = var.health_check
   target_group_port = var.target_group_port
-  vpc_id = data.aws_ssm_parameter.vpc_id.value 
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
 
-  #launch template 
-  image_id = data.aws_ami.devops.id 
-  security_group_id = data.aws_ssm_parameter.cart_sg_id.value 
-  user_data = filebase64("${path.module}/cart.sh")  
-  launch_template_tags = var.launch_template_tags 
+  #launch template
+  image_id = data.aws_ami.devops_ami.id
+  security_group_id = data.aws_ssm_parameter.cart_sg_id.value
+  user_data = filebase64("${path.module}/cart.sh")
+  launch_template_tags = var.launch_template_tags
 
   #autoscaling
-  vpc_zone_identifier = split(",",data.aws_ssm_parameter.private_subnet_ids.value) 
-  tag = var.autoscaling_tags 
-  
-  #autoscaling policy i am good with optional 
+  vpc_zone_identifier = split(",",data.aws_ssm_parameter.private_subnet_ids.value)
+  tag = var.autoscaling_tags
 
-  #listener rule 
-  alb_listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value 
-  rule_priority = 30 #catalogue have 10, user has 20 already
-  host_header = "cart.app.joindevops.cloud"  
+  #autoscalingpolicy, I am good with optional params
+
+  #listener rule
+  alb_listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value
+  rule_priority = 30 # catalogue have 10, user have 20 already
+  host_header = "cart.app.joindevops.online"
 
 }
-
-

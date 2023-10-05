@@ -19,7 +19,7 @@ module "records" {
   zone_name = var.zone_name
   records = [
     {
-        name    = "mongodb"
+        name    = "redis"
         type    = "A"
         ttl     = 1
         records = [
