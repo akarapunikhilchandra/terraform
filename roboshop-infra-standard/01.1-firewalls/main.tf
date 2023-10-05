@@ -382,30 +382,6 @@ resource "aws_security_group_rule" "user_vpn" {
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.user_sg.security_group_id  
 }
-
-resource "aws_security_group_rule" "user_app_alb" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 8080
-  to_port           = 8080  
-  protocol          = "tcp"
-  source_security_group_id = module.app_alb_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.user_sg.security_group_id  
-}
-
-resource "aws_security_group_rule" "user_vpn" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 22
-  to_port           = 22  
-  protocol          = "tcp"
-  source_security_group_id = module.vpn_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.user_sg.security_group_id  
-}
 resource "aws_security_group_rule" "cart_vpn" {
   type              = "ingress"
   description = "allowing port number 22 from VPN"
