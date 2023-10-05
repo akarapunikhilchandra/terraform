@@ -30,69 +30,6 @@ module "mongodb_sg" {
   )
 }
 
-module "catalogue_sg" {
-  source = "../../terraform-aws-security-group"
-  project_name = var.project_name 
-  sg_name = "catalogue"
-  sg_description = "allowing traffic"
-# sg_ingress_rules = var.sg_ingress_rules
-  vpc_id = data.aws_ssm_parameter.vpc_id.value
-  common_tags = merge(
-    var.common_tags,
-    {
-        component = "catalogue",
-        Name = "catalogue"
-    }
-  )
-}
-
-module "web_sg" {
-  source = "../../terraform-aws-security-group"
-  project_name = var.project_name 
-  sg_name = "web"
-  sg_description = "allowing traffic"
-# sg_ingress_rules = var.sg_ingress_rules
-  vpc_id = data.aws_ssm_parameter.vpc_id.value
-  common_tags = merge(
-    var.common_tags,
-    {
-        component = "web",
-        Name = "web"
-    }
-  )
-}
-
-module "app_alb_sg" {
-  source = "../../terraform-aws-security-group"
-  project_name = var.project_name 
-  sg_name = "app_alb"
-  sg_description = "allowing traffic"
-# sg_ingress_rules = var.sg_ingress_rules
-  vpc_id = data.aws_ssm_parameter.vpc_id.value
-  common_tags = merge(
-    var.common_tags,
-    {
-        component = "app",
-        Name = "app-alb"
-    }
-  )
-}
-module "web_alb_sg" {
-  source = "../../terraform-aws-security-group"
-  project_name = var.project_name 
-  sg_name = "web_alb"
-  sg_description = "allowing traffic"
-# sg_ingress_rules = var.sg_ingress_rules
-  vpc_id = data.aws_ssm_parameter.vpc_id.value
-  common_tags = merge(
-    var.common_tags,
-    {
-        component = "web",
-        Name = "web-alb"
-    }
-  )
-}
-
 module "redis_sg" {
   source = "../../terraform-aws-security-group"
   project_name = var.project_name 
@@ -105,6 +42,54 @@ module "redis_sg" {
     {
         component = "redis",
         Name = "redis"
+    }
+  )
+}
+
+module "mysql_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "mysql"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "mysql",
+        Name = "mysql"
+    }
+  )
+}
+
+module "rabbitmq_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "rabbitmq"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "rabbitmq",
+        Name = "rabbitmq"
+    }
+  )
+}
+
+module "catalogue_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "catalogue"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "catalogue",
+        Name = "catalogue"
     }
   )
 }
@@ -125,6 +110,101 @@ module "user_sg" {
   )
 }
 
+module "cart_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "cart"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "cart",
+        Name = "cart"
+    }
+  )
+}
+
+module "shipping_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "shipping"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "shipping",
+        Name = "shipping"
+    }
+  )
+}
+
+module "payment_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "payment"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "payment",
+        Name = "payment"
+    }
+  )
+}
+
+module "web_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "web"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "web",
+        Name = "web"
+    }
+  )
+}
+
+module "web_alb_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "web_alb"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "web",
+        Name = "web-alb"
+    }
+  )
+}
+
+module "app_alb_sg" {
+  source = "../../terraform-aws-security-group"
+  project_name = var.project_name 
+  sg_name = "app_alb"
+  sg_description = "allowing traffic"
+# sg_ingress_rules = var.sg_ingress_rules
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
+  common_tags = merge(
+    var.common_tags,
+    {
+        component = "app",
+        Name = "app-alb"
+    }
+  )
+}
 
 resource "aws_security_group_rule" "vpn" {
   type              = "ingress"
@@ -157,7 +237,102 @@ resource "aws_security_group_rule" "mongodb_vpn" {
   source_security_group_id = module.vpn_sg.security_group_id 
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.mongodb_sg.security_group_id  
+  security_group_id = module.mongodb_sg.security_group_id
+}
+
+resource "aws_security_group_rule" "mongodb_user" {
+  type              = "ingress"
+  description = "allowing port number 22 from vpn"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  source_security_group_id = module.user_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.mongodb_sg.security_group_id
+}
+
+resource "aws_security_group_rule" "redis_user" {
+  type              = "ingress"
+  description = "allowing port number 6379 from user"
+  from_port         = 6379
+  to_port           = 6379    
+  protocol          = "tcp"
+  source_security_group_id = module.user_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.redis_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "redis_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22    
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.redis_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "redis_cart" {
+  type              = "ingress"
+  description = "allowing port number 6379 from cart"
+  from_port         = 6379
+  to_port           = 6379    
+  protocol          = "tcp"
+  source_security_group_id = module.cart_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.redis_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "mysql_vpn" {
+  type              = "ingress"
+  description = "allowing port number 6379 from cart"
+  from_port         = 22
+  to_port           = 22    
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.mysql_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "mysql_shipping" {
+  type              = "ingress"
+  description = "allowing port number 6379 from cart"
+  from_port         = 3306
+  to_port           = 3306    
+  protocol          = "tcp"
+  source_security_group_id = module.shipping_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.mysql_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "rabbitmq_vpn" {
+  type              = "ingress"
+  description = "allowing port number 6379 from cart"
+  from_port         = 22
+  to_port           = 22    
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.rabbitmq_sg.security_group_id  
+}
+resource "aws_security_group_rule" "rabbitmq_payment" {
+  type              = "ingress"
+  description = "allowing port number 6379 from cart"
+  from_port         = 5672
+  to_port           = 5672    
+  protocol          = "tcp"
+  source_security_group_id = module.payment_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.rabbitmq_sg.security_group_id  
 }
 
 resource "aws_security_group_rule" "catalogue_vpn" {
@@ -182,6 +357,77 @@ resource "aws_security_group_rule" "catalogue_app_alb" {
 #   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
 #   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = module.catalogue_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "user_app_alb" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 8080
+  to_port           = 8080  
+  protocol          = "tcp"
+  source_security_group_id = module.app_alb_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.user_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "user_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22  
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.user_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "user_app_alb" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 8080
+  to_port           = 8080  
+  protocol          = "tcp"
+  source_security_group_id = module.app_alb_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.user_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "user_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22  
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.user_sg.security_group_id  
+}
+resource "aws_security_group_rule" "cart_vpn" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 22
+  to_port           = 22  
+  protocol          = "tcp"
+  source_security_group_id = module.vpn_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.cart_sg.security_group_id  
+}
+
+resource "aws_security_group_rule" "cart_app_alb" {
+  type              = "ingress"
+  description = "allowing port number 22 from VPN"
+  from_port         = 80
+  to_port           = 80  
+  protocol          = "tcp"
+  source_security_group_id = module.app_alb_sg.security_group_id 
+#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
+#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.cart_sg.security_group_id  
 }
 
 resource "aws_security_group_rule" "app_alb_vpn" {
@@ -268,62 +514,3 @@ resource "aws_security_group_rule" "web_alb_internet_https" {
   security_group_id = module.web_alb_sg.security_group_id  
 }
 
-resource "aws_security_group_rule" "redis_user" {
-  type              = "ingress"
-  description = "allowing port number 6379 from user"
-  from_port         = 6379
-  to_port           = 6379    
-  protocol          = "tcp"
-  source_security_group_id = module.user_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.redis_sg.security_group_id  
-}
-
-resource "aws_security_group_rule" "redis_vpn" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 22
-  to_port           = 22    
-  protocol          = "tcp"
-  source_security_group_id = module.vpn_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.redis_sg.security_group_id  
-}
-
-resource "aws_security_group_rule" "user_app_alb" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 8080
-  to_port           = 8080  
-  protocol          = "tcp"
-  source_security_group_id = module.app_alb_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.user_sg.security_group_id  
-}
-
-resource "aws_security_group_rule" "user_vpn" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 22
-  to_port           = 22  
-  protocol          = "tcp"
-  source_security_group_id = module.vpn_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.user_sg.security_group_id  
-}
-
-resource "aws_security_group_rule" "mongodb_user" {
-  type              = "ingress"
-  description = "allowing port number 22 from VPN"
-  from_port         = 22
-  to_port           = 22  
-  protocol          = "tcp"
-  source_security_group_id = module.user_sg.security_group_id 
-#   cidr_blocks       = ["${chomp(data.http.myip.body)}/32"]
-#   ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.mongodb_sg.security_group_id  
-}
