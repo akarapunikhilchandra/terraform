@@ -1,6 +1,8 @@
 pipeline {
     agent { node { label 'AGENT-1' } }
-    
+    options {
+        ansiColor('xterm')
+    }
     stages {
         stage('Init') {
             steps {
@@ -10,35 +12,6 @@ pipeline {
                     ls -ltr
                     pwd
                     terraform init
-                '''
-            }
-        }
-        stage('Plan') {
-            steps {
-                sh'''
-                    cd roboshop-infra-standard
-                    ls -ltr
-                    pwd
-                    cd 01-vpc
-                    terraform plan
-                '''
-            }
-        }
-        stage('Approve') {
-            steps{
-                input "Shall I apply?"
-            }
-        }
-
-        stage('Apply') {
-            steps{
-                
-                sh '''
-                    cd roboshop-infra-standard
-                    pwd
-                    ls -ltr
-                    cd 01-vpc
-                    terraform destroy -auto-approve
                 '''
             }
         }
