@@ -12,6 +12,7 @@ pipeline {
         stage('init') {
             steps {
                 sh '''
+                cd roboshop-infra-standard
                 cd 01-vpc
                 ls -ltr
                 pwd
