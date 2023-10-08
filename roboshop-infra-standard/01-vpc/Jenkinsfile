@@ -38,7 +38,7 @@ pipeline {
                     pwd
                     ls -ltr
                     cd 01-vpc
-                    terraform apply -auto-approve
+                    terraform destroy -auto-approve
                 '''
             }
         }
