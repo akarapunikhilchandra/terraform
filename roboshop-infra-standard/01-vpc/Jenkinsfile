@@ -1,5 +1,6 @@
 pipeline {
     agent { node { label 'AGENT-1' } }
+    
     stages {
         stage('Init') {
             steps {
@@ -8,7 +9,7 @@ pipeline {
                     cd 01-vpc
                     ls -ltr
                     pwd
-                    terraform init 
+                    terraform init
                 '''
             }
         }
@@ -16,7 +17,6 @@ pipeline {
             steps {
                 sh'''
                     cd roboshop-infra-standard
-                    cd 01-vpc
                     ls -ltr
                     pwd
                     cd 01-vpc
@@ -35,7 +35,6 @@ pipeline {
                 
                 sh '''
                     cd roboshop-infra-standard
-                    cd 01-vpc
                     pwd
                     ls -ltr
                     cd 01-vpc
@@ -43,6 +42,7 @@ pipeline {
                 '''
             }
         }
+    }
 
     post { 
         always { 
