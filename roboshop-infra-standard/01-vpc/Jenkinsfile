@@ -12,7 +12,7 @@ pipeline {
                     cd 01-vpc
                     ls -ltr
                     pwd
-                    terraform init -reconfigure
+                    // terraform init -reconfigure
                     terraform init
                 '''
             }
