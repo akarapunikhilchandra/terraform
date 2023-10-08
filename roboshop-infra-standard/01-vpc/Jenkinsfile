@@ -9,7 +9,7 @@ pipeline {
     }
 
     stages {
-        stage('init') {
+        stage('Init') {
             steps {
                 sh '''
                 cd roboshop-infra-standard
@@ -20,7 +20,7 @@ pipeline {
                 '''
             }
         }
-        stage('plan') {
+        stage('Plan') {
             steps {
                 sh '''
                 cd roboshop-infra-standard
