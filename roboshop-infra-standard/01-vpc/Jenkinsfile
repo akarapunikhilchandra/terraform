@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'agent'
-        }
-    }
+    agent { node { label 'agent' } }
     options {
         ansiColor('xterm')
     }
@@ -11,42 +7,55 @@ pipeline {
     stages {
         stage('Init') {
             steps {
-                sh '''
-                cd roboshop-infra-standard
-                cd 01-vpc
-                ls -ltr
-                pwd
-                terraform init
+                sh'''
+                    cd roboshop-infra-standard
+                    cd 01-vpc
+                    ls -ltr
+                    pwd
+                    terraform init
                 '''
             }
         }
         stage('Plan') {
             steps {
-                sh '''
-                cd roboshop-infra-standard
-                cd 01-vpc
-                ls -ltr
-                pwd
-                terraform plan
+                sh'''
+                    cd roboshop-infra-standard
+                    ls -ltr
+                    pwd
+                    cd 01-vpc
+                    terraform plan
                 '''
             }
         }
-    //     stage('Deploy') {
-    //         steps {
-    //             echo 'Deploying....'
-    //         }
-    //     }
-    // }
+        stage('Approve') {
+            steps{
+                input "Shall I apply?"
+            }
+        }
 
-    post {
-        always {
-            echo 'always'
+        stage('Apply') {
+            steps{
+                
+                sh '''
+                    cd roboshop-infra-standard
+                    pwd
+                    ls -ltr
+                    cd 01-vpc
+                    terraform apply -auto-approve
+                '''
+            }
         }
-        success {
-            echo 'i will run when success'
+    }
+
+    post { 
+        always { 
+            echo 'I will always run whether job is success or not'
         }
-        failure {
-            echo 'i will run when failure'
+        success{
+            echo 'I will run only when job is success'
+        }
+        failure{
+            echo 'I will run when failure'
         }
     }
 }
