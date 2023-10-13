@@ -16,6 +16,10 @@ variable "project_name" {
   
 }
 
+variable "env" {
+  
+}
+
 # even optional, it is good to give tags
 variable "common_tags" {
   default = {}
@@ -88,3 +92,4 @@ variable "default_route_table_id" {
 variable "default_vpc_cidr" {
   
 }
+
