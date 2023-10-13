@@ -9,7 +9,7 @@ module "vpn_sg" {
     var.common_tags,
     {
         component = "vpn",
-        Name = "roboshop-vpn"
+        Name = "${var.project_name}-vpn-${var.env}"
     }
   )
 }
@@ -25,7 +25,7 @@ module "mongodb_sg" {
     var.common_tags,
     {
         component = "mongodb",
-        Name = "mongodb"
+        Name = "${var.project_name}-mongodb-${var.env}"
     }
   )
 }
@@ -41,7 +41,7 @@ module "redis_sg" {
     var.common_tags,
     {
         component = "redis",
-        Name = "redis"
+        Name = "${var.project_name}-redis-${var.env}"
     }
   )
 }
@@ -57,7 +57,7 @@ module "mysql_sg" {
     var.common_tags,
     {
         component = "mysql",
-        Name = "mysql"
+        Name = "${var.project_name}-mysql-${var.env}"
     }
   )
 }
@@ -73,7 +73,7 @@ module "rabbitmq_sg" {
     var.common_tags,
     {
         component = "rabbitmq",
-        Name = "rabbitmq"
+        Name = "${var.project_name}-rabbitmq-${var.env}"
     }
   )
 }
@@ -89,7 +89,7 @@ module "catalogue_sg" {
     var.common_tags,
     {
         component = "catalogue",
-        Name = "catalogue"
+        Name = "${var.project_name}-catalogue-${var.env}"
     }
   )
 }
@@ -105,7 +105,7 @@ module "user_sg" {
     var.common_tags,
     {
         component = "user",
-        Name = "user"
+        Name = "${var.project_name}-user-${var.env}"
     }
   )
 }
@@ -121,7 +121,7 @@ module "cart_sg" {
     var.common_tags,
     {
         component = "cart",
-        Name = "cart"
+        Name = "${var.project_name}-cart-${var.env}"
     }
   )
 }
@@ -137,7 +137,7 @@ module "shipping_sg" {
     var.common_tags,
     {
         component = "shipping",
-        Name = "shipping"
+        Name = "${var.project_name}-shipping-${var.env}"
     }
   )
 }
@@ -153,7 +153,7 @@ module "payment_sg" {
     var.common_tags,
     {
         component = "payment",
-        Name = "payment"
+        Name = "${var.project_name}-payment-${var.env}"
     }
   )
 }
@@ -169,7 +169,7 @@ module "web_sg" {
     var.common_tags,
     {
         component = "web",
-        Name = "web"
+        Name = "${var.project_name}-web-${var.env}"
     }
   )
 }
@@ -185,7 +185,7 @@ module "web_alb_sg" {
     var.common_tags,
     {
         component = "web",
-        Name = "web-alb"
+        Name = "${var.project_name}-web-alb-${var.env}"
     }
   )
 }
@@ -201,7 +201,7 @@ module "app_alb_sg" {
     var.common_tags,
     {
         component = "app",
-        Name = "app-alb"
+        Name = "${var.project_name}-app-alb-${var.env}"
     }
   )
 }

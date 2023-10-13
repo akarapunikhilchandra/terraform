@@ -1,5 +1,5 @@
 #!/bin/bash
+yum install python3.11-devel python3.11-pip -y
+pip3.11 install ansible botocore boto3
 cd /tmp
-git clone https://github.com/akarapunikhilchandra/roboshop-shell-tf.git
-cd roboshop-shell-tf
-sh mongodb.sh 
+ansible-pull -U https://github.com/akarapunikhilchandra/ansible-roles-dev.git -e component=mongodb main.yaml

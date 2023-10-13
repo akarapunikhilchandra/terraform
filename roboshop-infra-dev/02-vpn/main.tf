@@ -29,7 +29,7 @@ module "vpn_instance" {
   # subnet_id = local.public_subnet_ids[0]  #public subnet of default vpc 
   tags = merge(
     {
-        Name = "Roboshop-VPN"
+        Name = "${var.project_name}-${var.env}-vpn"
     },
     var.common_tags
   )

@@ -1,5 +1,5 @@
 resource "aws_lb" "app_alb" {
-  name               = "${var.project_name}-${var.common_tags.component}"
+  name               = "${var.project_name}-${var.env}-${var.common_tags.component}"
   internal           = true
   load_balancer_type = "application"
   security_groups    = [data.aws_ssm_parameter.app_alb_sg_id.value]
@@ -33,7 +33,7 @@ module "records" {
 
   records = [
     {
-      name    = "*.app"
+      name    = "*.app-${var.env}"
       type    = "A"
       alias   = {
         name    = aws_lb.app_alb.dns_name 

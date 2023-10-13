@@ -31,7 +31,7 @@ module "mongodb_instance" {
   user_data = file("mongodb.sh")
   tags = merge(
     {
-        Name = "mongodb "
+        Name = "${var.project_name}-${var.env}-mongodb"
     },
     var.common_tags
   )
@@ -42,7 +42,7 @@ module "records" {
   zone_name = var.zone_name
   records = [
     {
-        name    = "mongodb"
+        name    = "${var.mongodb_record_name}-${var.env}"
         type    = "A"
         ttl     = 1
         records = [

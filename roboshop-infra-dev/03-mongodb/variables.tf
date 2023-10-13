@@ -16,3 +16,7 @@ variable "env" {
 variable "zone_name" {
   default = "joindevops.cloud"
 }
+
+variable "mongodb_record_name"{
+  default = "mongodb"
+}
