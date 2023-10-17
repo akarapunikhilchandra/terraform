@@ -19,11 +19,16 @@ resource "aws_instance" "remote" {
     password = "DevOps321"
     host     = self.public_ip
   }
+  # copy the file
+  provisioner "file" {
+    source      = "catalogue.sh"
+    destination = "/tmp/catalogue.sh"
+  }
 
   provisioner "remote-exec" {
     inline = [
-      "sudo yum install nginx -y",
-      "sudo systemctl start nginx"
+      "chmod +x /tmp/catalogue.sh",
+      "sudo sh /tmp/catalogue.sh"
     ]
   }
 }
