@@ -1,4 +1,4 @@
-    bucket = "roboshop-state-dev"
+    bucket = "roboshop-locking"
     key = "tfvars"
     region = "us-east-1"
-    dynamodb_table = "roboshop-locking-dev"
+    dynamodb_table = "roboshop-state-lock"
