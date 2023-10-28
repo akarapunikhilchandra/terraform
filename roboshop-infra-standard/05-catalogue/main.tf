@@ -88,6 +88,7 @@ resource "aws_lb_listener_rule" "catalogue" {
   }
    condition {
     host_header {
+      #for DEV instance it should be app-dev and for prod it must be app-prod 
       values = ["catalogue.app.joindevops.cloud"]
     }
   }
