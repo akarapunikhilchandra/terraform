@@ -2,7 +2,7 @@ variable "project_name" {
   default = "roboshop"
 }
 variable "env" {
-  default = "dev"
+  default = "prod"
 }
 
 variable "cidr_block" {
