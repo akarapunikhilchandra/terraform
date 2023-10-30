@@ -3,14 +3,14 @@ variable "project_name" {
 }
 
 variable "env" {
-  default = "dev"
+  default = "prod"
 }
 
 variable "common_tags" {
   default = {
     Project = "roboshop"
     Component = "iam"
-    Environment = "DEV"
+    Environment = "PROD"
     Terraform = "true"
   }
 }
