@@ -4,7 +4,7 @@ variable "project_name" {
 variable "common_tags" {
   default = {
     Project = "roboshop"
-    #component = "firewalls-dev"
+    component = "firewalls-dev"
     Environment = "PROD"
     Terraform = "true"
   }
